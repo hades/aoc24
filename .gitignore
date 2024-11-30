@@ -1,0 +1,5 @@
+.vs/
+aoc24/bin/
+aoc24/obj/
+tests/bin/
+tests/obj/
