@@ -52,6 +52,25 @@ public class TestAutosubmit
   }
 
   [Fact]
+  public void TestWrongLevel()
+  {
+    var mockHttp = MockHttpClientWithResponse("<html><p>You don't seem to be solving the right level.</p></html>");
+    var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
+    Assert.Equal(Autosubmit.Result.WRONG_LEVEL, result);
+  }
+
+  [Fact]
+  public void TestWrongLevel_DoesNotCache()
+  {
+    var mockHttp = MockHttpClientWithResponse("<html><p>You don't seem to be solving the right level.</p></html>");
+    var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
+    Assert.Equal(Autosubmit.Result.WRONG_LEVEL, result);
+    mockHttp = MockHttpClientWithResponse("<html><p>That's the right answer</p></html>");
+    result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
+    Assert.Equal(Autosubmit.Result.ACCEPTED, result);
+  }
+
+  [Fact]
   public void TestRejectedTooLow()
   {
     var mockHttp =

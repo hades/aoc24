@@ -16,7 +16,8 @@ public class Autosubmit
     ACCEPTED,
     REJECTED,
     REJECTED_TOO_LOW,
-    REJECTED_TOO_HIGH
+    REJECTED_TOO_HIGH,
+    WRONG_LEVEL
   }
 
   public static Result Submit(int day, int part, string answer, HttpClient httpClient,
@@ -44,6 +45,9 @@ public class Autosubmit
     }
 
     var result = SubmitToServer(day, part, answer, httpClient, delayFunc);
+    if (result == Result.WRONG_LEVEL) {
+      return result;
+    }
     if (result == Result.REJECTED)
     {
       problemResults.TryAdd("rejected", new TomlArray());
@@ -120,6 +124,7 @@ public class Autosubmit
       return SubmitToServer(day, part, answer, httpClient, delayFunc);
     }
 
+    if (response.Contains("You don't seem to be solving the right level.")) return Result.WRONG_LEVEL;
     if (response.Contains("That's the right answer")) return Result.ACCEPTED;
     if (response.Contains("your answer is too high")) return Result.REJECTED_TOO_HIGH;
     if (response.Contains("your answer is too low")) return Result.REJECTED_TOO_LOW;
