@@ -1,5 +1,7 @@
 .vs/
 aoc24/bin/
 aoc24/obj/
+aoc24/Properties/launchSettings.json
 tests/bin/
 tests/obj/
+results.toml
