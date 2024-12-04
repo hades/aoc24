@@ -142,4 +142,27 @@ public class TestAutosubmit
     Assert.Equal(Autosubmit.Result.REJECTED_TOO_LOW,
       Autosubmit.Submit(7, 1, "30", MockHttpClientWithError(), ResultsFile, _ => { }));
   }
+
+  [Theory]
+  [InlineData("You have 48s left to wait", 48)]
+  [InlineData("You have 5m 31s left to wait", 331)]
+  public void TestBackoff(string prompt, int expectedDelay)
+  {
+    var mockHttp = new Mock<HttpMessageHandler>();
+    var responseWithTimeout = new HttpResponseMessage(HttpStatusCode.OK);
+    responseWithTimeout.Content = new StringContent("<html><p>You gave an answer too recently. " + prompt);
+    var responseWithReply = new HttpResponseMessage(HttpStatusCode.OK);
+    responseWithReply.Content = new StringContent("<html><p>That's the right answer</p></html>");
+    int responseCount = 0;
+    mockHttp.Protected().Setup<HttpResponseMessage>(
+        "Send", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+      .Callback(() => responseCount += 1)
+      .Returns(() => responseCount >= 2 ? responseWithReply : responseWithTimeout);
+
+    int? actualDelay = null;
+    Assert.Equal(Autosubmit.Result.ACCEPTED,
+      Autosubmit.Submit(7, 1, "42", new HttpClient(mockHttp.Object), ResultsFile, delay => actualDelay = delay));
+
+    Assert.Equal(expectedDelay, actualDelay);
+  }
 }

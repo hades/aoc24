@@ -119,7 +119,7 @@ public class Autosubmit
       var m = new Regex("You have (?:(\\d+)m )?(\\d+)s left to wait").Match(response);
       if (!m.Success) throw new InvalidOperationException($"failed to parse response: {response}");
       var (minutes, seconds) = (m.Groups[1].Value, m.Groups[2].Value);
-      var timeout = int.Parse(minutes ?? "0") * 60 + int.Parse(seconds ?? "0");
+      var timeout = (minutes.Length > 0 ? int.Parse(minutes) : 0) * 60 + (seconds.Length > 0 ? int.Parse(seconds) : 0);
       delayFunc(timeout);
       return SubmitToServer(day, part, answer, httpClient, delayFunc);
     }
