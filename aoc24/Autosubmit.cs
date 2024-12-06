@@ -120,6 +120,8 @@ public class Autosubmit
       if (!m.Success) throw new InvalidOperationException($"failed to parse response: {response}");
       var (minutes, seconds) = (m.Groups[1].Value, m.Groups[2].Value);
       var timeout = (minutes.Length > 0 ? int.Parse(minutes) : 0) * 60 + (seconds.Length > 0 ? int.Parse(seconds) : 0);
+      Console.WriteLine($"waiting {timeout} seconds before submitting",
+        ColorTranslator.FromHtml("#bdbdbd"));
       delayFunc(timeout);
       return SubmitToServer(day, part, answer, httpClient, delayFunc);
     }
