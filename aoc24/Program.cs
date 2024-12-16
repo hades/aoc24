@@ -114,7 +114,7 @@ public class Program
   private class Options
   {
     [Option('v', "verbose", Required = false, HelpText = "Enable verbose output.")]
-    public bool Verbose { get; }
+    public bool Verbose { get; set; }
 
     [Option('s', "submit", Required = false, HelpText = "Automatically submit the answer.")]
     public bool Submit { get; set; }
@@ -125,7 +125,7 @@ public class Program
 
     [Option('2', "second_only", Required = false,
       HelpText = "Only solve the second part of the puzzle.")]
-    public bool SecondOnly { get; }
+    public bool SecondOnly { get; set; }
 
     [Value(0)] public required IEnumerable<int> Days { get; set; }
 
