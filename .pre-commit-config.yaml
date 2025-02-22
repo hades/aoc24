@@ -1,0 +1,14 @@
+repos:
+-   repo: https://github.com/hades/pre-commit-hooks
+    rev: 31903eabdb97f5a3375fb1ea419ff782de64d7e7
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: check-toml
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.2.4
+  hooks:
+  - id: codespell
