@@ -1,8 +1,7 @@
-﻿namespace aoc24;
+namespace aoc24;
 
 [ForDay(15)]
-public class Day15 : Solver
-{
+public class Day15 : Solver {
   private char[][] map;
   private int width, height;
   private string movements;
@@ -30,8 +29,11 @@ public class Day15 : Solver
     }
     foreach (var m in movements) {
       var (dx, dy) = m switch {
-        '^' => (0, -1), '>' => (1, 0), 'v' => (0, 1), '<' => (-1, 0),
-          _ => (0, 0)
+        '^' => (0, -1),
+        '>' => (1, 0),
+        'v' => (0, 1),
+        '<' => (-1, 0),
+        _ => (0, 0)
       };
       if ((dx, dy) == (0, 0)) continue;
       var (x, y) = (robot_x + dx, robot_y + dy);
@@ -63,7 +65,11 @@ public class Day15 : Solver
 
   public string SolveSecond() {
     var expanded_data = map.Select(row => row.SelectMany<char, char>(ch => ch switch {
-          '#' => ['#', '#'], 'O' => ['[', ']'], '.' => ['.', '.'], '@' => ['@', '.'] }).ToArray()).ToArray();
+      '#' => ['#', '#'],
+      'O' => ['[', ']'],
+      '.' => ['.', '.'],
+      '@' => ['@', '.']
+    }).ToArray()).ToArray();
     int robot_x = -1, robot_y = -1;
     for (int i = 0; i < width * 2; i++) {
       for (int j = 0; j < height; j++) {
@@ -78,8 +84,11 @@ public class Day15 : Solver
     if (robot_x < 0) throw new InvalidDataException();
     foreach (var m in movements) {
       var (dx, dy) = m switch {
-        '^' => (0, -1), '>' => (1, 0), 'v' => (0, 1), '<' => (-1, 0),
-          _ => (0, 0)
+        '^' => (0, -1),
+        '>' => (1, 0),
+        'v' => (0, 1),
+        '<' => (-1, 0),
+        _ => (0, 0)
       };
       if ((dx, dy) == (0, 0)) continue;
       var (x, y) = (robot_x + dx, robot_y + dy);
@@ -108,7 +117,8 @@ public class Day15 : Solver
       List<(int, int)> boxes_to_move = [(x, y)];
       if (expanded_data[y][x] == ']') {
         boxes_to_move.Add((x - 1, y));
-      } else {
+      }
+      else {
         boxes_to_move.Add((x + 1, y));
       }
       List<(int, int)> boxes_move_ordered = [];
@@ -125,12 +135,13 @@ public class Day15 : Solver
           next_boxes.Add((box_x, box_y + dy));
           if (expanded_data[box_y + dy][box_x] == ']') {
             next_boxes.Add((box_x - 1, box_y + dy));
-          } else {
+          }
+          else {
             next_boxes.Add((box_x + 1, box_y + dy));
           }
         }
         if (impossible) break;
-        boxes_to_move = [..next_boxes];
+        boxes_to_move = [.. next_boxes];
       }
       if (impossible) continue;
       boxes_move_ordered.Reverse();

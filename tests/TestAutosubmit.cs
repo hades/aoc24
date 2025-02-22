@@ -1,21 +1,18 @@
-﻿using System.Net;
+using System.Net;
 using aoc24;
 using Moq;
 using Moq.Protected;
 
 namespace tests;
 
-public class TestAutosubmit
-{
+public class TestAutosubmit {
   private readonly string ResultsFile = Path.GetTempFileName();
 
-  ~TestAutosubmit()
-  {
+  ~TestAutosubmit() {
     if (File.Exists(ResultsFile)) File.Delete(ResultsFile);
   }
 
-  private static HttpClient MockHttpClientWithResponse(string content)
-  {
+  private static HttpClient MockHttpClientWithResponse(string content) {
     var mockHttp = new Mock<HttpMessageHandler>();
     var response = new HttpResponseMessage(HttpStatusCode.OK);
     response.Content = new StringContent(content);
@@ -25,8 +22,7 @@ public class TestAutosubmit
     return new HttpClient(mockHttp.Object);
   }
 
-  private static HttpClient MockHttpClientWithError()
-  {
+  private static HttpClient MockHttpClientWithError() {
     var mockHttp = new Mock<HttpMessageHandler>();
     var response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
     mockHttp.Protected().Setup<HttpResponseMessage>(
@@ -36,32 +32,28 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestAcceptedResult()
-  {
+  public void TestAcceptedResult() {
     var mockHttp = MockHttpClientWithResponse("<html><p>That's the right answer</p></html>");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
     Assert.Equal(Autosubmit.Result.ACCEPTED, result);
   }
 
   [Fact]
-  public void TestRejectedResult()
-  {
+  public void TestRejectedResult() {
     var mockHttp = MockHttpClientWithResponse("<html><p>That's not the right answer</p></html>");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
     Assert.Equal(Autosubmit.Result.REJECTED, result);
   }
 
   [Fact]
-  public void TestWrongLevel()
-  {
+  public void TestWrongLevel() {
     var mockHttp = MockHttpClientWithResponse("<html><p>You don't seem to be solving the right level.</p></html>");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
     Assert.Equal(Autosubmit.Result.WRONG_LEVEL, result);
   }
 
   [Fact]
-  public void TestWrongLevel_DoesNotCache()
-  {
+  public void TestWrongLevel_DoesNotCache() {
     var mockHttp = MockHttpClientWithResponse("<html><p>You don't seem to be solving the right level.</p></html>");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
     Assert.Equal(Autosubmit.Result.WRONG_LEVEL, result);
@@ -71,8 +63,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestRejectedTooLow()
-  {
+  public void TestRejectedTooLow() {
     var mockHttp =
       MockHttpClientWithResponse("<html><p>That's not the right answer - your answer is too low.");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
@@ -80,8 +71,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestRejectedTooHigh()
-  {
+  public void TestRejectedTooHigh() {
     var mockHttp =
       MockHttpClientWithResponse("<html><p>That's not the right answer - your answer is too high.");
     var result = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
@@ -89,8 +79,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestDoesNotResubmitRejectedResult()
-  {
+  public void TestDoesNotResubmitRejectedResult() {
     var mockHttp = MockHttpClientWithResponse("<html><p>That's not the right answer</p></html>");
     var resultFirst = Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { });
     Assert.Equal(Autosubmit.Result.REJECTED, resultFirst);
@@ -100,8 +89,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestMultipleRejectedResults()
-  {
+  public void TestMultipleRejectedResults() {
     var mockHttp = MockHttpClientWithResponse("<html><p>That's not the right answer</p></html>");
     Assert.Equal(Autosubmit.Result.REJECTED,
       Autosubmit.Submit(7, 1, "42", mockHttp, ResultsFile, _ => { }));
@@ -118,8 +106,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestChecksUpperBound()
-  {
+  public void TestChecksUpperBound() {
     var mockHttp =
       MockHttpClientWithResponse("<html><p>That's not the right answer - your answer is too high.");
     Assert.Equal(Autosubmit.Result.REJECTED_TOO_HIGH,
@@ -131,8 +118,7 @@ public class TestAutosubmit
   }
 
   [Fact]
-  public void TestChecksLowerBound()
-  {
+  public void TestChecksLowerBound() {
     var mockHttp =
       MockHttpClientWithResponse("<html><p>That's not the right answer - your answer is too low.");
     Assert.Equal(Autosubmit.Result.REJECTED_TOO_LOW,
@@ -146,8 +132,7 @@ public class TestAutosubmit
   [Theory]
   [InlineData("You have 48s left to wait", 48)]
   [InlineData("You have 5m 31s left to wait", 331)]
-  public void TestBackoff(string prompt, int expectedDelay)
-  {
+  public void TestBackoff(string prompt, int expectedDelay) {
     var mockHttp = new Mock<HttpMessageHandler>();
     var responseWithTimeout = new HttpResponseMessage(HttpStatusCode.OK);
     responseWithTimeout.Content = new StringContent("<html><p>You gave an answer too recently. " + prompt);

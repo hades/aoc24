@@ -1,10 +1,9 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 
 namespace aoc24;
 
 [ForDay(7)]
-public class Day07 : Solver
-{
+public class Day07 : Solver {
   private ImmutableList<(long, ImmutableList<long>)> equations;
 
   public void Presolve(string input) {

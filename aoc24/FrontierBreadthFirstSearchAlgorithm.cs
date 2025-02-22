@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms;
 using System.Collections.Immutable;
 

@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace aoc24;
 
 [ForDay(14)]
-public partial class Day14 : Solver
-{
+public partial class Day14 : Solver {
   [GeneratedRegex(@"^p=(-?\d+),(-?\d+) v=(-?\d+),(-?\d+)$")]
   private static partial Regex LineRe();
 
@@ -15,7 +14,7 @@ public partial class Day14 : Solver
   public void Presolve(string input) {
     var data = input.Trim();
     foreach (var line in data.Split("\n")) {
-      if (LineRe().Match(line) is not { Success: true } match ) {
+      if (LineRe().Match(line) is not { Success: true } match) {
         throw new InvalidDataException($"parse error: ${line}");
       }
       robots.Add((
@@ -32,7 +31,7 @@ public partial class Day14 : Solver
     foreach (var robot in robots) {
       int x = (robot.X + 100 * (robot.Vx > 0 ? robot.Vx : robot.Vx + width)) % width;
       int y = (robot.Y + 100 * (robot.Vy > 0 ? robot.Vy : robot.Vy + height)) % height;
-      if (x == width/2 || y == height/2) continue;
+      if (x == width / 2 || y == height / 2) continue;
       var q = (x < width / 2, y < height / 2);
       quadrants[q] = quadrants.GetValueOrDefault(q, 0) + 1;
     }

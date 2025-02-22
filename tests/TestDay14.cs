@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay14
-{
+public class TestDay14 {
   private const string data = @"p=0,4 v=3,-3
 p=6,3 v=-1,-3
 p=10,3 v=-1,2
@@ -521,8 +520,7 @@ p=91,17 v=13,59
   [Theory]
   [InlineData(data, "12", true)]
   [InlineData(big_data, "214109808", false)]
-  public void TestFirstPart(string data, string answer, bool set_test_mode)
-  {
+  public void TestFirstPart(string data, string answer, bool set_test_mode) {
     var solver = new Day14();
     if (set_test_mode) solver.SetTestMode();
     solver.Presolve(data.Replace("\r\n", "\n"));
@@ -531,8 +529,7 @@ p=91,17 v=13,59
 
   [Theory]
   [InlineData(big_data, "7687")]
-  public void TestSecondPart(string data, string answer)
-  {
+  public void TestSecondPart(string data, string answer) {
     var solver = new Day14();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal(answer, solver.SolveSecond());

@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay23
-{
+public class TestDay23 {
   private const string example1 = @"kh-tc
 qp-kh
 de-cg
@@ -39,8 +38,7 @@ td-yn
 
   [Theory]
   [InlineData(example1, "7")]
-  public void TestFirstPart(string data, string answer)
-  {
+  public void TestFirstPart(string data, string answer) {
     var solver = new Day23();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal(answer, solver.SolveFirst());
@@ -48,8 +46,7 @@ td-yn
 
   [Theory]
   [InlineData(example1, "co,de,ka,ta")]
-  public void TestSecondPart(string data, string answer)
-  {
+  public void TestSecondPart(string data, string answer) {
     var solver = new Day23();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal(answer, solver.SolveSecond());

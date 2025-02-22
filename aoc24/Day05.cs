@@ -1,11 +1,10 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.TopologicalSort;
 
 namespace aoc24;
 
 [ForDay(5)]
-public class Day05 : Solver
-{
+public class Day05 : Solver {
   private List<int[]> updates;
   private List<int[]> updates_ordered;
 

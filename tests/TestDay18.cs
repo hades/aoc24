@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay18
-{
+public class TestDay18 {
   private const string example1 = @"5,4
 4,2
 4,5
@@ -32,8 +31,7 @@ public class TestDay18
 
   [Theory]
   [InlineData(example1, "22")]
-  public void TestFirstPart(string data, string answer)
-  {
+  public void TestFirstPart(string data, string answer) {
     var solver = new Day18();
     solver.SetTestData();
     solver.Presolve(data.Replace("\r\n", "\n"));
@@ -42,8 +40,7 @@ public class TestDay18
 
   [Theory]
   [InlineData(example1, "6,1")]
-  public void TestSecondPart(string data, string answer)
-  {
+  public void TestSecondPart(string data, string answer) {
     var solver = new Day18();
     solver.SetTestData();
     solver.Presolve(data.Replace("\r\n", "\n"));

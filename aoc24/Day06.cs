@@ -1,12 +1,14 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 
 namespace aoc24;
 
 [ForDay(6)]
-public class Day06 : Solver
-{
+public class Day06 : Solver {
   private readonly (int, int)[] directions = [
-    (0, -1), (1, 0), (0, 1), (-1, 0)
+    (0, -1),
+    (1, 0),
+    (0, 1),
+    (-1, 0)
     ];
 
   private ImmutableArray<string> data;
@@ -31,7 +33,7 @@ public class Day06 : Solver
   }
 
   private bool IsWithinBounds(int x, int y) => x >= 0 && y >= 0 && x < width && y < height;
-  
+
   private (HashSet<(int, int)> Path, bool IsLoop) Walk((int, int)? obstacle = null) {
     int obstacle_x = obstacle?.Item1 ?? -1;
     int obstacle_y = obstacle?.Item2 ?? -1;

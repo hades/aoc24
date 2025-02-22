@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay13
-{
+public class TestDay13 {
   private const string data = @"Button A: X+94, Y+34
 Button B: X+22, Y+67
 Prize: X=8400, Y=5400
@@ -21,16 +20,14 @@ Prize: X=18641, Y=10279
 ";
 
   [Fact]
-  public void TestFirstPart()
-  {
+  public void TestFirstPart() {
     var solver = new Day13();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal("480", solver.SolveFirst());
   }
 
   [Fact]
-  public void TestSecondPart()
-  {
+  public void TestSecondPart() {
     var solver = new Day13();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal("875318608908", solver.SolveSecond());

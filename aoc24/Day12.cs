@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.ConnectedComponents;
 using QuickGraph.Algorithms.Search;
 using Point = (int, int);
@@ -6,8 +6,7 @@ using Point = (int, int);
 namespace aoc24;
 
 [ForDay(12)]
-public class Day12 : Solver
-{
+public class Day12 : Solver {
   private string[] data;
   private int width, height;
   private Dictionary<int, long> perimeters = [];
@@ -45,7 +44,8 @@ public class Day12 : Solver
           int y = Math.Min(edge.Source.Item2, edge.Target.Item2);
           x_sides.TryAdd((component, y), []);
           x_sides[(component, y)].Add(edge.Source.Item2 > edge.Target.Item2 ? edge.Source.Item1 : -edge.Source.Item1 - 5);
-        } else {
+        }
+        else {
           int x = Math.Min(edge.Source.Item1, edge.Target.Item1);
           y_sides.TryAdd((component, x), []);
           y_sides[(component, x)].Add(edge.Source.Item1 > edge.Target.Item1 ? edge.Source.Item2 : -edge.Source.Item2 - 5);
@@ -87,10 +87,10 @@ public class Day12 : Solver
       .Where(component => areas.ContainsKey(component))
       .Select(component => areas[component] * sides[component]).Sum().ToString();
 
-  private record struct PointEdge(Point Source, Point Target): IEdge<Point>;
+  private record struct PointEdge(Point Source, Point Target) : IEdge<Point>;
 
-  private IUndirectedGraph<Point, PointEdge> MakeGraph(bool with_edges_between_plots)=>
-    new DelegateUndirectedGraph<Point, PointEdge>(GetVertices(), with_edges_between_plots? GetAllEdges : GetEdgesWithoutBorders, false);
+  private IUndirectedGraph<Point, PointEdge> MakeGraph(bool with_edges_between_plots) =>
+    new DelegateUndirectedGraph<Point, PointEdge>(GetVertices(), with_edges_between_plots ? GetAllEdges : GetEdgesWithoutBorders, false);
 
   private bool IsWithinBounds(int x, int y) => x >= 0 && x < width && y >= 0 && y < height;
   private bool IsWithinBounds(Point p) => IsWithinBounds(p.Item1, p.Item2);

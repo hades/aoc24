@@ -1,17 +1,16 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.Search;
 using Point = (int, int);
 
 namespace aoc24;
 
 [ForDay(10)]
-public class Day10 : Solver
-{
+public class Day10 : Solver {
   private int[][] data;
   private int width, height;
   private List<int> destinations_counts = [], paths_counts = [];
 
-  private record PointEdge(Point Source, Point Target): IEdge<Point>;
+  private record PointEdge(Point Source, Point Target) : IEdge<Point>;
 
   private DelegateVertexAndEdgeListGraph<Point, PointEdge> MakeGraph() => new(AllPoints(), GetNeighbours);
 

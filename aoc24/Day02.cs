@@ -1,15 +1,13 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra;
 using System.Collections.Immutable;
 
 namespace aoc24;
 
 [ForDay(2)]
-public class Day02 : Solver
-{
+public class Day02 : Solver {
   private ImmutableList<Vector<Double>> data;
 
-  public void Presolve(string input)
-  {
+  public void Presolve(string input) {
     data = input.Trim().Split("\n").Select(line => Vector<Double>.Build.DenseOfEnumerable(line.Split(' ').Select(double.Parse))).ToImmutableList();
   }
 

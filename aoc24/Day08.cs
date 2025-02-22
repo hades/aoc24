@@ -1,10 +1,9 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 
 namespace aoc24;
 
 [ForDay(8)]
-public class Day08 : Solver
-{
+public class Day08 : Solver {
   private ImmutableArray<string> data;
   private int width, height;
 
@@ -52,13 +51,13 @@ public class Day08 : Solver
           int di = i - oi;
           int dj = j - oj;
           for (int ai = i, aj = j;
-               ai >= 0 && aj >= 0 && ai < width && aj < height; 
-               ai += di, aj +=dj) {
+               ai >= 0 && aj >= 0 && ai < width && aj < height;
+               ai += di, aj += dj) {
             antinodes.Add((ai, aj));
           }
           for (int ai = oi, aj = oj;
-               ai >= 0 && aj >= 0 && ai < width && aj < height; 
-               ai -= di, aj -=dj) {
+               ai >= 0 && aj >= 0 && ai < width && aj < height;
+               ai -= di, aj -= dj) {
             antinodes.Add((ai, aj));
           }
         }

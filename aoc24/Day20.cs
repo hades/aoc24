@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.ShortestPath;
 using System.Xml.Schema;

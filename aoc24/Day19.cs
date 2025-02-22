@@ -1,4 +1,4 @@
-﻿namespace aoc24;
+namespace aoc24;
 
 [ForDay(19)]
 public class Day19 : Solver {

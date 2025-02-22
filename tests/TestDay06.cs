@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay06
-{
+public class TestDay06 {
   private static readonly string data = @"....#.....
 .........#
 ..........
@@ -16,16 +15,14 @@ public class TestDay06
 ".Replace("\r\n", "\n");
 
   [Fact]
-  public void TestFirstPart()
-  {
+  public void TestFirstPart() {
     var solver = new Day06();
     solver.Presolve(data);
     Assert.Equal("41", solver.SolveFirst());
   }
 
   [Fact]
-  public void TestSecondPart()
-  {
+  public void TestSecondPart() {
     var solver = new Day06();
     solver.Presolve(data);
     Assert.Equal("6", solver.SolveSecond());

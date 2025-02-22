@@ -1,26 +1,26 @@
-﻿namespace aoc24;
+namespace aoc24;
 
 [ForDay(21)]
 public class Day21 : Solver {
   private static readonly Dictionary<char, (int, int)> numeric_keypad = new() {
-    ['A']= (0, 0),
-    ['0']= (-1, 0),
-    ['1']= (-2, -1),
-    ['2']= (-1, -1),
-    ['3']= (0, -1),
-    ['4']= (-2, -2),
-    ['5']= (-1, -2),
-    ['6']= (0, -2),
-    ['7']= (-2, -3),
-    ['8']= (-1, -3),
-    ['9']= (0, -3),
+    ['A'] = (0, 0),
+    ['0'] = (-1, 0),
+    ['1'] = (-2, -1),
+    ['2'] = (-1, -1),
+    ['3'] = (0, -1),
+    ['4'] = (-2, -2),
+    ['5'] = (-1, -2),
+    ['6'] = (0, -2),
+    ['7'] = (-2, -3),
+    ['8'] = (-1, -3),
+    ['9'] = (0, -3),
   };
   private static readonly Dictionary<char, (int, int)> directional_keypad = new() {
-    ['A']= (0, 0),
-    ['^']= (-1, 0),
-    ['<']= (-2, 1),
-    ['v']= (-1, 1),
-    ['>']= (0, 1),
+    ['A'] = (0, 0),
+    ['^'] = (-1, 0),
+    ['<'] = (-2, 1),
+    ['v'] = (-1, 1),
+    ['>'] = (0, 1),
   };
 
   private string[] data;
@@ -105,7 +105,7 @@ public class Day21 : Solver {
         yield return "^" + encoding;
       }
     }
-    if (pos1.Item2 < pos2.Item2 ) {
+    if (pos1.Item2 < pos2.Item2) {
       foreach (var encoding in EnumerateArrowEncodings((pos1.Item1, pos1.Item2 + 1), pos2)) {
         yield return "v" + encoding;
       }

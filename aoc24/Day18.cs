@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.ShortestPath;
 
 namespace aoc24;
@@ -40,7 +40,7 @@ public class Day18 : Solver {
   }
 
   public void Presolve(string input) {
-    fallen_bytes_in_order = [..input.Trim().Split("\n")
+    fallen_bytes_in_order = [.. input.Trim().Split("\n")
       .Select(line => line.Split(","))
       .Select(pair => (int.Parse(pair[0]), int.Parse(pair[1])))];
     fallen_bytes = [.. fallen_bytes_in_order.Take(bytes)];
@@ -62,7 +62,7 @@ public class Day18 : Solver {
   public string SolveSecond() {
     foreach (var b in fallen_bytes_in_order[bytes..]) {
       fallen_bytes.Add(b);
-      if (Solve() > width*height) return $"{b.Item1},{b.Item2}";
+      if (Solve() > width * height) return $"{b.Item1},{b.Item2}";
     }
     throw new Exception("solution not found");
   }

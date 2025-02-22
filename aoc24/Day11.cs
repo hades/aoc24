@@ -1,9 +1,8 @@
-﻿
+
 namespace aoc24;
 
 [ForDay(11)]
-public class Day11 : Solver
-{
+public class Day11 : Solver {
   private long[] data;
 
   private class TreeNode(TreeNode? left, TreeNode? right, long value) {

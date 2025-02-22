@@ -1,8 +1,7 @@
-﻿using aoc24;
+using aoc24;
 
 namespace tests;
-public class TestDay12
-{
+public class TestDay12 {
   private const string data = @"RRRRIICCFF
 RRRRIICCCF
 VVRRRCCFFF
@@ -16,16 +15,14 @@ MMMISSJEEE
 ";
 
   [Fact]
-  public void TestFirstPart()
-  {
+  public void TestFirstPart() {
     var solver = new Day12();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal("1930", solver.SolveFirst());
   }
 
   [Fact]
-  public void TestSecondPart()
-  {
+  public void TestSecondPart() {
     var solver = new Day12();
     solver.Presolve(data.Replace("\r\n", "\n"));
     Assert.Equal("1206", solver.SolveSecond());

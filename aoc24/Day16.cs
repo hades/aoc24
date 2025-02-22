@@ -1,4 +1,4 @@
-﻿using QuickGraph;
+using QuickGraph;
 using QuickGraph.Algorithms.ShortestPath;
 
 namespace aoc24;
@@ -28,7 +28,8 @@ public class Day16 : Solver {
         if (data[j][i] == 'S') {
           start_x = i;
           start_y = j;
-        } else if (data[j][i] == 'E') {
+        }
+        else if (data[j][i] == 'E') {
           end_x = i;
           end_y = j;
         }
@@ -85,9 +86,9 @@ public class Day16 : Solver {
     if (!search.Distances.TryGetValue(vertex, out var distance_to_me)) return [];
     List<(int, int, int)> candidates = [
           (x, y, (dir + 1) % 4),
-          (x, y, (dir + 3) % 4),
-          (x - directions[dir].Item1, y - directions[dir].Item2, dir),
-      ];
+      (x, y, (dir + 3) % 4),
+      (x - directions[dir].Item1, y - directions[dir].Item2, dir),
+    ];
     HashSet<(int, int, int)> result = [vertex];
     foreach (var (cx, cy, cdir) in candidates) {
       if (!search.Distances.TryGetValue((cx, cy, cdir), out var distance_to_candidate)) continue;

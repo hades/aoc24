@@ -1,10 +1,9 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 
 namespace aoc24;
 
 [ForDay(9)]
-public class Day09 : Solver
-{
+public class Day09 : Solver {
   private string data;
 
   public void Presolve(string input) {
@@ -19,7 +18,8 @@ public class Day09 : Solver
       if (file) {
         Enumerable.Range(0, ch - '0').ToList().ForEach(_ => arr.Add(file_id));
         file_id++;
-      } else {
+      }
+      else {
         Enumerable.Range(0, ch - '0').ToList().ForEach(_ => arr.Add(-1));
       }
       file = !file;

@@ -1,8 +1,7 @@
-﻿namespace aoc24;
+namespace aoc24;
 
 [ForDay(4)]
-public class Day04 : Solver
-{
+public class Day04 : Solver {
   private int width, height;
   private char[,] data;
 
@@ -20,8 +19,7 @@ public class Day04 : Solver
 
   private static readonly string word = "XMAS";
 
-  public string SolveFirst()
-  {
+  public string SolveFirst() {
     int counter = 0;
     for (int start_i = 0; start_i < height; start_i++) {
       for (int start_j = 0; start_j < width; start_j++) {
@@ -43,8 +41,7 @@ public class Day04 : Solver
     return counter.ToString();
   }
 
-  public string SolveSecond()
-  {
+  public string SolveSecond() {
     int counter = 0;
     for (int start_i = 1; start_i < height - 1; start_i++) {
       for (int start_j = 1; start_j < width - 1; start_j++) {
