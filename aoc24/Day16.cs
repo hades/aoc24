@@ -28,8 +28,7 @@ public class Day16 : Solver {
         if (data[j][i] == 'S') {
           start_x = i;
           start_y = j;
-        }
-        else if (data[j][i] == 'E') {
+        } else if (data[j][i] == 'E') {
           end_x = i;
           end_y = j;
         }

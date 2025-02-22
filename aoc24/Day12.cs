@@ -44,8 +44,7 @@ public class Day12 : Solver {
           int y = Math.Min(edge.Source.Item2, edge.Target.Item2);
           x_sides.TryAdd((component, y), []);
           x_sides[(component, y)].Add(edge.Source.Item2 > edge.Target.Item2 ? edge.Source.Item1 : -edge.Source.Item1 - 5);
-        }
-        else {
+        } else {
           int x = Math.Min(edge.Source.Item1, edge.Target.Item1);
           y_sides.TryAdd((component, x), []);
           y_sides[(component, x)].Add(edge.Source.Item1 > edge.Target.Item1 ? edge.Source.Item2 : -edge.Source.Item2 - 5);

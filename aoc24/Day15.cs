@@ -117,8 +117,7 @@ public class Day15 : Solver {
       List<(int, int)> boxes_to_move = [(x, y)];
       if (expanded_data[y][x] == ']') {
         boxes_to_move.Add((x - 1, y));
-      }
-      else {
+      } else {
         boxes_to_move.Add((x + 1, y));
       }
       List<(int, int)> boxes_move_ordered = [];
@@ -135,8 +134,7 @@ public class Day15 : Solver {
           next_boxes.Add((box_x, box_y + dy));
           if (expanded_data[box_y + dy][box_x] == ']') {
             next_boxes.Add((box_x - 1, box_y + dy));
-          }
-          else {
+          } else {
             next_boxes.Add((box_x + 1, box_y + dy));
           }
         }

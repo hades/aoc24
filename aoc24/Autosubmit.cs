@@ -46,15 +46,12 @@ public class Autosubmit {
     if (result == Result.REJECTED) {
       problemResults.TryAdd("rejected", new TomlArray());
       ((TomlArray)problemResults["rejected"]).Add(answer);
-    }
-    else if (result == Result.ACCEPTED) {
+    } else if (result == Result.ACCEPTED) {
       problemResults.Add("accepted", answer);
-    }
-    else if (result == Result.REJECTED_TOO_LOW) {
+    } else if (result == Result.REJECTED_TOO_LOW) {
       problemResults.Remove("lower_bound");
       problemResults.Add("lower_bound", Math.Max(long.Parse(answer), lowerBound ?? long.MinValue));
-    }
-    else if (result == Result.REJECTED_TOO_HIGH) {
+    } else if (result == Result.REJECTED_TOO_HIGH) {
       problemResults.Remove("upper_bound");
       problemResults.Add("upper_bound", Math.Min(long.Parse(answer), upperBound ?? long.MaxValue));
     }

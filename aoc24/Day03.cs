@@ -28,11 +28,9 @@ public partial class Day03 : Solver {
     foreach (Match match in fullRegex().Matches(input)) {
       if (match.Groups[1].Length > 0) {
         enabled = true;
-      }
-      else if (match.Groups[2].Length > 0) {
+      } else if (match.Groups[2].Length > 0) {
         enabled = false;
-      }
-      else if (enabled) {
+      } else if (enabled) {
         sum += int.Parse(match.Groups[4].Value) * int.Parse(match.Groups[5].Value);
       }
     }
