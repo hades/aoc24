@@ -12,3 +12,11 @@ repos:
   rev: v2.2.4
   hooks:
   - id: codespell
+- repo: local
+  hooks:
+    - id: dotnet-format
+      name: checking formatting with dotnet format
+      entry: dotnet format --include
+      language: system
+      pass_filenames: true
+      types: [c#]
